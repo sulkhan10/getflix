@@ -4,7 +4,8 @@
     "password": "postgres",
     "database": "db_getflix",
     "host": "localhost",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "port": 5434
   },
   "test": {
     "username": "postgres",

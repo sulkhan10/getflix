@@ -7,7 +7,15 @@ class UserController {
   static async register(req, res, next) {
     try {
       let { username, fullname, password } = req.body;
-      console.log(req.body);
+    
+      // Check if the username already exists in the database
+      const existingUser = await User.findOne({ where: { username } });
+      console.log(existingUser);
+      if (existingUser) {
+        throw { name: "DuplicateAccount" };
+      }
+    
+      // console.log(req.body);
       let role = "user";
       let user = await User.create({
         username,
@@ -16,7 +24,7 @@ class UserController {
         role,
       });
       res
-        .status(201)
+        .status(200)
         .json({
           username: user.username,
           fullname: user.fullname,
@@ -25,6 +33,7 @@ class UserController {
     } catch (error) {
       next(error);
     }
+    
   }
 
   static async login(req, res, next) {

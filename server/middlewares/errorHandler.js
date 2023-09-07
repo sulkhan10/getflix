@@ -15,6 +15,10 @@ module.exports = (error, req, res, next) => {
         status = 401;
         message = "Error Invalid Email or Password";
         break;
+      case "DuplicateAccount":
+        status = 401;
+        message = "User name already registered";
+        break;
       case "NotFound":
         status = 404;
         message = "Error Data is Not Found";
