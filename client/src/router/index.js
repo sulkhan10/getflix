@@ -1,3 +1,6 @@
+import React from "react";
+import { createBrowserRouter } from "react-router-dom";
+import Home from "../pages/Home.js";
 import Main from "../pages/Main";
 import DetailMovie from "../pages/DetailMovie";
 import NowPlaying from "../pages/NowPlaying";
@@ -6,8 +9,7 @@ import TopRated from "../pages/TopRated";
 import Popular from "../pages/Popular";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import { createBrowserRouter, redirect } from "react-router-dom";
-import Home from "../pages/Home.js";
+import PrivateRoute from "./PrivateRoute"; // Import the PrivateRoute component
 
 const router = createBrowserRouter([
   {
@@ -43,8 +45,22 @@ const router = createBrowserRouter([
       },
       {
         path: "/popular",
-        element: <Popular />,
+        element: (
+          <PrivateRoute>
+            <Popular />
+          </PrivateRoute>
+        ),
+        // element: <Popular />,
       },
+      // Use PrivateRoute to protect routes
+      // {
+      //   path: "/protected-route",
+      //   element: (
+      //     <PrivateRoute>
+      //       <ProtectedComponent />
+      //     </PrivateRoute>
+      //   ),
+      // },
     ],
   },
 ]);
